@@ -2,6 +2,9 @@
   "name": "derp-api",
   "version": "1.0.12",
   "main": "dist/index.js",
+  "repository": "derpsoft/derp-api",
+  "homepage": "https://github.com/derpsoft/derp-api",
+  "issues": "https://github.com/derpsoft/derp-api/issues",
   "author": "James Cunningham <james@derprecated.com>",
   "license": "MIT",
   "scripts": {
