@@ -1,0 +1,32 @@
+{
+  "name": "derp-api",
+  "version": "1.0.11",
+  "main": "dist/index.js",
+  "author": "James Cunningham <james@derprecated.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "babel src -d dist --watch",
+    "build": "babel src -d dist",
+    "prepublish": "yarn run build"
+  },
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.17.4",
+    "lodash-inflection": "^1.5.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-plugin-istanbul": "^4.1.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-es2017": "^6.22.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-friendly-formatter": "^2.0.7",
+    "eslint": "^3.18.0",
+    "flow-bin": "^0.42.0"
+  }
+}
