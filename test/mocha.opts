@@ -1,0 +1,5 @@
+-r babel-register
+-r chai
+-r chai-as-promised
+--ui bdd
+--recursive

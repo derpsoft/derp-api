@@ -10,7 +10,7 @@ _.mixin(inflection);
 const t = Constants.apiTemplates;
 
 export default class CrudApi extends Fetchable {
-  constructor(name, routes = {}, apiRoot = 'https://inventory-api-pro.azurewebsites.net') {
+  constructor(name, routes = {}) {
     super();
 
     this.routes = _.merge(t, routes);
