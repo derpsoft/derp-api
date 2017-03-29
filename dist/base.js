@@ -62,7 +62,7 @@ var CrudApi = function (_Fetchable) {
     var apiRoot = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'https://inventory-api-pro.azurewebsites.net';
     (0, _classCallCheck3.default)(this, CrudApi);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (CrudApi.__proto__ || (0, _getPrototypeOf2.default)(CrudApi)).call(this, _constants2.default.API_ROOT, store));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (CrudApi.__proto__ || (0, _getPrototypeOf2.default)(CrudApi)).call(this));
 
     _this.routes = _lodash2.default.merge(t, routes);
     _this.name = name;

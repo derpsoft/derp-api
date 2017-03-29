@@ -1,3 +1,5 @@
+// @flow
+
 import _ from 'lodash';
 import inflection from 'lodash-inflection';
 import Fetchable from './fetchable';
@@ -9,7 +11,8 @@ const t = Constants.apiTemplates;
 
 export default class CrudApi extends Fetchable {
   constructor(name, routes = {}, apiRoot = 'https://inventory-api-pro.azurewebsites.net') {
-    super(Constants.API_ROOT, store);
+    super();
+
     this.routes = _.merge(t, routes);
     this.name = name;
     this.one = _(name).singularize().toLower();
