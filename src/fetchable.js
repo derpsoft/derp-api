@@ -15,7 +15,7 @@ export default class Fetchable {
       throw new Error('baseUrl may not be empty');
     }
     this.baseUrl = baseUrl;
-    this.fetch = fetcher;
+    this.fetch = fetcher || fetch;
   }
 
   request(verb: string, url : string, options : any = {}) : Promise < Object > {

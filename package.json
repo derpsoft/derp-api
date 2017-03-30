@@ -1,6 +1,6 @@
 {
   "name": "derp-api",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "main": "dist/index.js",
   "repository": "derpsoft/derp-api",
   "homepage": "https://github.com/derpsoft/derp-api",
@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "babel src -d dist --watch",
     "build": "babel src -d dist",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "test": "BABEL_ENV=test mocha"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
@@ -27,9 +28,15 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
+    "babel-register": "^6.24.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
     "eslint": "^3.18.0",
     "eslint-config-airbnb-base": "^11.1.2",
     "eslint-friendly-formatter": "^2.0.7",
-    "flow-bin": "^0.42.0"
+    "fetch-mock": "^5.9.4",
+    "flow-bin": "^0.42.0",
+    "mocha": "^3.2.0",
+    "sinon": "^2.1.0"
   }
 }
