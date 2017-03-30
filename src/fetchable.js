@@ -40,6 +40,7 @@ export default class Fetchable {
     return this.request('PATCH', url, options);
   }
 
+  // I think this flow error is due to the override in CrudApi changing the param types
   delete(url : string, options : any = {}) : Promise < Object > {
     return this.request('DELETE', url, options);
   }

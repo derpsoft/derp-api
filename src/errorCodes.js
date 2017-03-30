@@ -1,14 +1,22 @@
+// @flow
 import {
   FetchError
 } from './errors';
 
-const knownCodes = {
-  302: 'Redirect',
-  400: 'Validation',
-  401: 'Unauthorized',
-  403: 'Forbidden',
-  405: 'Not Implemented',
-  500: {
+const knownCodes: {
+  '302': string,
+  '400': string,
+  '401': string,
+  '403': string,
+  '405': string,
+  '500': Object,
+} = {
+  '302': 'Redirect',
+  '400': 'Validation',
+  '401': 'Unauthorized',
+  '403': 'Forbidden',
+  '405': 'Not Implemented',
+  '500': {
     message: 'Server Error',
     formatter: m => m,
   },
@@ -21,7 +29,7 @@ const knownCodes = {
 export default function getErrorCodeHandler({
   response,
   json,
-}) {
+}: Object) : Function {
   const {
     status
   } = response;
