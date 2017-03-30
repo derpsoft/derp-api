@@ -1,8 +1,11 @@
+// @flow
 import _ from 'lodash';
 import inflection from 'lodash-inflection';
 import CrudApi from './base';
 
 _.mixin(inflection);
+
+let singleton : any = null;
 
 export default class Order extends CrudApi {
   constructor() {
@@ -12,17 +15,17 @@ export default class Order extends CrudApi {
       GET_ORDER_BY_KEY: (x, id, key) => `/api/v1/${_(x).pluralize().toLower()}/summary/${key}/${id}`,
     });
 
-    if (Order.prototype.singleton) {
-      return Order.prototype.singleton;
+    if (singleton) {
+      return singleton;
     }
-    Order.prototype.singleton = this;
+    singleton = this;
 
-    return this;
+    return singleton;
   }
 
   captureBilling({
     id
-  }, token) {
+  } : Object, token : string) : Promise<Object> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -39,7 +42,7 @@ export default class Order extends CrudApi {
   getByKey({
     id,
     key
-  }) {
+  } : Object) : Promise<Object> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -52,7 +55,7 @@ export default class Order extends CrudApi {
 
   updateStatus({
     id
-  }, status) {
+  } : Object, status : Object) {
     const headers = {
       'Content-Type': 'application/json',
     };

@@ -2,30 +2,33 @@ module.exports = {
   root: true,
   env: {
     es6: true,
-    browser: true,
+    browser: false,
     node: true,
   },
+  parser: ['babel-eslint'],
   parserOptions: {
     sourceType: 'module',
     ecmaFeatures: {
       experimentalObjectRestSpread: true
     }
   },
-  extends: 'airbnb-base',
-  // required to lint *.vue files
+  extends: [
+    "airbnb-base",
+    "plugin:flowtype/recommended"
+  ],
   plugins: [
-    'html'
+    'flowtype',
+    'flowtype-errors'
   ],
   // check if imports actually resolve
   'settings': {
-    'import/resolver': {
-      'webpack': {
-        'config': 'build/webpack.base.conf.js'
-      }
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
     }
   },
   // add your custom rules here
   'rules': {
+    "flowtype-errors/show-errors": 2,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',
