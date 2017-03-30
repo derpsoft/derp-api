@@ -3,7 +3,7 @@ import _ from 'lodash';
 import inflection from 'lodash-inflection';
 import CrudApi from './base';
 
-_.mixin(inflection);
+_.mixin(inflection, {});
 
 let singleton : any = null;
 
