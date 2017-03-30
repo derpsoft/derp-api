@@ -2,6 +2,7 @@
 import {
   FetchError
 } from './errors';
+import Configuration from './configuration';
 
 const knownCodes: {
   '302': string,
@@ -22,6 +23,13 @@ const knownCodes: {
   },
 };
 
+function handleError(e: Error) {
+  Configuration.globalErrorHandler(e);
+  if (Configuration.throwErrors) {
+    throw e;
+  }
+}
+
 /*
   Returns a function that handles the given error code.
   If there is no error, returns a NOOP-equivalent function.
@@ -29,7 +37,7 @@ const knownCodes: {
 export default function getErrorCodeHandler({
   response,
   json,
-}: Object) : Function {
+}: Object): Function {
   const {
     status
   } = response;
@@ -37,7 +45,7 @@ export default function getErrorCodeHandler({
   if (handler) {
     if (typeof handler === 'string') {
       return () => {
-        throw new FetchError(json, handler);
+        return handleError(new FetchError(json, handler));
       };
     } else if (typeof handler === 'object') {
       return () => {
@@ -50,7 +58,7 @@ export default function getErrorCodeHandler({
         if (formatter) {
           message = formatter(message);
         }
-        throw new FetchError(json, message);
+        return handleError(new FetchError(json, message));
       };
     }
   }

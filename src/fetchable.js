@@ -1,4 +1,4 @@
-// @flow
+//@flow
 
 import _ from 'lodash';
 import fetch from 'isomorphic-fetch';
@@ -41,6 +41,7 @@ export default class Fetchable {
   }
 
   // I think this flow error is due to the override in CrudApi changing the param types
+  // $FlowFixMe
   delete(url : string, options : any = {}) : Promise < Object > {
     return this.request('DELETE', url, options);
   }
