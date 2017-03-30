@@ -1,6 +1,6 @@
 {
   "name": "derp-api",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "main": "dist/index.js",
   "repository": "derpsoft/derp-api",
   "homepage": "https://github.com/derpsoft/derp-api",
