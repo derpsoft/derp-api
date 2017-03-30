@@ -1,10 +1,14 @@
+//@flow
+
 class config {
-  token = '';
-  apiRoot = '';
+  token : string = '';
+  apiRoot : string = '';
+  throwErrors : bool = true;
+  globalErrorHandler = (e : Error) => {
+    console.error(e);
+  };
 
-  constructor() {}
-
-  getAuthorizationHeader() {
+  getAuthorizationHeader() : string {
     return `Bearer ${this.token}`;
   }
 };
