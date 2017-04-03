@@ -5,7 +5,7 @@ import inflection from 'lodash-inflection';
 import Fetchable from './fetchable';
 import Constants from './constants';
 
-_.mixin(inflection);
+_.mixin(inflection, {});
 
 const t = Constants.apiTemplates;
 

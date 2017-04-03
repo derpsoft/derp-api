@@ -8,8 +8,9 @@
   "author": "James Cunningham <james@derprecated.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "babel src -d dist --watch",
     "build": "babel src -d dist",
+    "dev": "babel src -d dist --watch",
+    "postinstall": "yarn run flow-typed install && yarn run build",
     "prepublish": "yarn run build",
     "test": "BABEL_ENV=test mocha"
   },
