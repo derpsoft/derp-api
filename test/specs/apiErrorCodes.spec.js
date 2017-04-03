@@ -11,9 +11,7 @@ describe('apiErrorCodes', () => {
       status: 200,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.not.throw();
+    expect(getErrorCodeHandler(response)).to.not.throw();
   });
 
   it('should not throw on 204 responses', () => {
@@ -22,9 +20,7 @@ describe('apiErrorCodes', () => {
       status: 204,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.not.throw();
+    expect(getErrorCodeHandler(response)).to.not.throw();
   });
 
   it('should throw redirect errors', () => {
@@ -33,9 +29,7 @@ describe('apiErrorCodes', () => {
       status: 302,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 
   it('should throw validation errors', () => {
@@ -44,9 +38,7 @@ describe('apiErrorCodes', () => {
       status: 400,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 
   it('should throw authorization errors', () => {
@@ -55,9 +47,7 @@ describe('apiErrorCodes', () => {
       status: 401,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 
   it('should throw permission errors', () => {
@@ -66,9 +56,7 @@ describe('apiErrorCodes', () => {
       status: 403,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 
   it('should throw implementation errors', () => {
@@ -77,9 +65,7 @@ describe('apiErrorCodes', () => {
       status: 405,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 
   it('should throw server errors', () => {
@@ -88,8 +74,6 @@ describe('apiErrorCodes', () => {
       status: 500,
     };
 
-    expect(getErrorCodeHandler({
-      response,
-    })).to.throw();
+    expect(getErrorCodeHandler(response)).to.throw();
   });
 });

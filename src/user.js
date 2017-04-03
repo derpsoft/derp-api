@@ -1,19 +1,22 @@
+// @flow
 import CrudApi from './base';
+
+let singleton : any = null;
 
 export default class User extends CrudApi {
   constructor() {
     super('user');
 
-    if (User.prototype.singleton) {
-      return User.prototype.singleton;
+    if (singleton) {
+      return singleton;
     }
-    User.prototype.singleton = this;
+    singleton = this;
 
-    return this;
+    return singleton;
   }
 
-  typeahead(query, includeDeleted = false) {
-    const body = new URLSearchParams();
+  typeahead(query : string, includeDeleted : boolean = false) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('query', query);
     body.set('includeDeleted', includeDeleted);
 

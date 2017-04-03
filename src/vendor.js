@@ -1,14 +1,18 @@
+// @flow
 import CrudApi from './base';
+
+let singleton : any = null;
 
 export default class Vendor extends CrudApi {
   constructor() {
     super('vendor');
 
-    if (Vendor.prototype.singleton) {
-      return Vendor.prototype.singleton;
+    if (singleton) {
+      return singleton;
     }
-    Vendor.prototype.singleton = this;
 
-    return this;
+    singleton = this;
+
+    return singleton;
   }
 }

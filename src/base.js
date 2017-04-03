@@ -10,7 +10,12 @@ _.mixin(inflection);
 const t = Constants.apiTemplates;
 
 export default class CrudApi extends Fetchable {
-  constructor(name, routes = {}) {
+  routes : Object;
+  name : string;
+  one : string;
+  many : string;
+
+  constructor(name : string, routes : Object = {}) {
     super();
 
     this.routes = _.merge(t, routes);
@@ -19,8 +24,8 @@ export default class CrudApi extends Fetchable {
     this.many = _(name).pluralize().toLower();
   }
 
-  count(includeDeleted = false) {
-    const body = new URLSearchParams();
+  count(includeDeleted : boolean = false) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('includeDeleted', includeDeleted);
 
     return super
@@ -28,8 +33,8 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result);
   }
 
-  list(skip = 0, take = 25, includeDeleted = false) {
-    const body = new URLSearchParams();
+  list(skip : number = 0, take : number = 25, includeDeleted : boolean = false) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('skip', skip);
     // body.set('take', take);
     body.set('includeDeleted', includeDeleted);
@@ -39,8 +44,8 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result || json[this.many]);
   }
 
-  single(id, includeDeleted = false) {
-    const body = new URLSearchParams();
+  single(id : number, includeDeleted : boolean = false) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('includeDeleted', includeDeleted);
 
     return super
@@ -48,8 +53,8 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result || json[this.one]);
   }
 
-  typeahead(query, includeDeleted = false) {
-    const body = new URLSearchParams();
+  typeahead(query : string, includeDeleted : boolean = false) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('query', query);
     body.set('includeDeleted', includeDeleted);
 
@@ -58,7 +63,7 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result);
   }
 
-  save(thing) {
+  save(thing : Object) : Promise<Object> {
     const id = thing.id;
     const headers = {
       'Content-Type': 'application/json',
@@ -73,7 +78,7 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result || json[this.one]);
   }
 
-  create(thing) {
+  create(thing : Object) : Promise<Object> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -86,7 +91,7 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result || json[this.one]);
   }
 
-  createMany(things) {
+  createMany(things : Object) : Promise<Object> {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -101,14 +106,14 @@ export default class CrudApi extends Fetchable {
       .then(json => json.result || json[this.many]);
   }
 
-  delete(id, rowVersion) {
+  delete(id : number, rowVersion : number) : Promise<Object> {
     if (id < 1) {
       throw new Error('id must be >= 1');
     }
     if (rowVersion < 1) {
       throw new Error('rowVersion must be >= 1');
     }
-    const body = new URLSearchParams();
+    const body : any = new URLSearchParams();
     body.set('rowVersion', rowVersion);
     return super
       .delete(`${this.routes.DELETE(this.name)}/${id}?${body}`)

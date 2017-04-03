@@ -1,26 +1,29 @@
+// @flow
 import Fetchable from './fetchable';
+
+let singleton : any = null;
 
 export default class Report extends Fetchable {
   constructor() {
     super();
 
-    if (Report.prototype.singleton) {
-      return Report.prototype.singleton;
+    if (singleton) {
+      return singleton;
     }
-    Report.prototype.singleton = this;
+    singleton = this;
 
-    return this;
+    return singleton;
   }
 
-  dashboard() {
-    const body = new URLSearchParams();
+  dashboard() : Promise<Object> {
+    const body : any = new URLSearchParams();
 
     return super.get(`/api/v1/reports/dashboard?${body}`)
       .then(json => json.result);
   }
 
-  salesByProduct(groupBy, productId) {
-    const body = new URLSearchParams();
+  salesByProduct(groupBy : string, productId : number) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('groupBy', groupBy);
     body.set('productId', productId);
 
@@ -28,16 +31,16 @@ export default class Report extends Fetchable {
       .then(json => json.report);
   }
 
-  salesByTotal(groupBy) {
-    const body = new URLSearchParams();
+  salesByTotal(groupBy : string) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('groupBy', groupBy);
 
     return super.get(`/api/v1/reports/salesByTotal?${body}`)
       .then(json => json.report);
   }
 
-  salesByVendor(groupBy, vendorId) {
-    const body = new URLSearchParams();
+  salesByVendor(groupBy : string, vendorId : number) : Promise<Object> {
+    const body : any = new URLSearchParams();
     body.set('groupBy', groupBy);
     body.set('vendorId', vendorId);
 
