@@ -50,19 +50,26 @@ export default class Fetchable {
     return this.request('SEARCH', url, options);
   }
 
-  deserialize(response: Object): Promise < Object > {
-    return response.json().then((json) => {
-      return {
-        json,
-        response
-      };
-    }).catch((e) => {
+  deserialize(response: Object): Promise < Object > | Object {
+    if (response.ok) {
+      return response.json().then((json) => {
+        return {
+          json,
+          response
+        };
+      }).catch((e) => {
+        return {
+          json: {},
+          error: e,
+          response
+        };
+      });
+    } else {
       return {
         json: {},
-        error: e,
         response
       };
-    });
+    }
   }
 
   _fetch(url: string, options: Object) {
@@ -70,14 +77,15 @@ export default class Fetchable {
       throw new Error('url may not be empty');
     }
     return this.fetch(this.baseUrl + url, options)
-      .then(res => this.deserialize(res))
+      .then(response => this.deserialize(response))
       .then(({
         response,
         json
       }) => {
         getErrorCodeHandler(response)();
         return json;
-      });
+      })
+      .catch(e => getErrorCodeHandler(e)());
   }
 
   toForm(body: Object) {
