@@ -28,7 +28,7 @@ module.exports = {
   },
   // add your custom rules here
   'rules': {
-    "flowtype-errors/show-errors": 2,
+    "flowtype-errors/show-errors": 1,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',
