@@ -2,6 +2,7 @@
 .env*
 node_modules
 dist
+flow-typed
 npm-debug.log
 yarn-error.log
 selenium-debug.log
