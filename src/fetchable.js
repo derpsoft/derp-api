@@ -122,8 +122,8 @@ export default class Fetchable {
       }
     };
     options.headers = _.merge({}, defaults.headers, options.headers);
-    options.credentials = 'omit';
-    options.mode = 'cors';
+    options.credentials = Configuration.fetch.credentials || 'omit';
+    options.mode = Configuration.fetch.mode || 'no-cors';
 
     return options;
   }
