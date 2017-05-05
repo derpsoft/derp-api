@@ -14,3 +14,4 @@ export Sale from './sale';
 export User from './user';
 export Vendor from './vendor';
 export Warehouse from './warehouse';
+export Base from './base';
