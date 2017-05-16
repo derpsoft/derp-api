@@ -18,7 +18,7 @@ export default class CrudApi extends Fetchable {
   constructor(name : string, routes : Object = {}) {
     super();
 
-    this.routes = _.merge(t, routes);
+    this.routes = _.merge({}, t, routes);
     this.name = name;
     this.one = _(name).singularize().toLower();
     this.many = _(name).pluralize().toLower();

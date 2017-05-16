@@ -8,12 +8,12 @@ _.mixin(inflection);
 let singleton : any = null;
 
 export default class Order extends CrudApi {
-  constructor() {
-    super('order', {
+  constructor(routes : Object = {}) {
+    super('order', _.merge({}, {
       CAPTURE_BILLING: (x, id) => `/api/v1/${_(x).pluralize().toLower()}/${id}/billing`,
       UPDATE_STATUS: (x, id, status) => `/api/v1/${_(x).pluralize().toLower()}/${id}/${status}`,
       GET_ORDER_BY_KEY: (x, id, key) => `/api/v1/${_(x).pluralize().toLower()}/summary/${key}/${id}`,
-    });
+    }, routes));
 
     if (singleton) {
       return singleton;

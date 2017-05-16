@@ -39,12 +39,28 @@ export default class Report extends Fetchable {
       .then(json => json.report);
   }
 
+  salesByUser(userId : string) : Promise<Object> {
+    return super.get(`/api/v1/reports/scalar/salesByUser?userId=${userId}`)
+      .then(json => json.report);
+  }
+
+  revenueByUser(userId : string) : Promise<Object> {
+    return super.get(`/api/v1/reports/scalar/revenueByUser?userId=${userId}`)
+      .then(json => json.result);
+  }
+
+  listingsByUser(userId : string) : Promise<Object> {
+    return super.get(`/api/v1/reports/scalar/listingsByUser?userId=${userId}`)
+      .then(json => json.result);
+  }
+
   salesByVendor(groupBy : string, vendorId : number) : Promise<Object> {
     const body : any = new URLSearchParams();
     body.set('groupBy', groupBy);
     body.set('vendorId', vendorId);
 
     return super.get(`/api/v1/reports/salesByVendor?${body}`)
-      .then(json => json.report);
+      .then(json => json.result);
   }
+
 }
