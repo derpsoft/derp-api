@@ -63,4 +63,13 @@ export default class Report extends Fetchable {
       .then(json => json.result);
   }
 
+  inventoryShippedByUser(userId : string) : Promise<number> {
+    return super.get(`/api/v1/reports/scalar/shippedByUser?userId=${userId}`)
+      .then(json => json.result);
+  }
+
+  inventoryReceivedByUser(userId : string) : Promise<number> {
+    return super.get(`/api/v1/reports/scalar/receivedByUser?userId=${userId}`)
+      .then(json => json.result);
+  }
 }
