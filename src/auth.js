@@ -1,8 +1,7 @@
-// @flow
 import Fetchable from './fetchable';
 import Constants from './constants';
 
-let singleton: any = null;
+let singleton = null;
 
 export default class Auth extends Fetchable {
   constructor() {
@@ -16,11 +15,11 @@ export default class Auth extends Fetchable {
     return singleton;
   }
 
-  register(username: string,
-    password: string,
-    email: string,
-    firstName: string,
-    lastName: string): Promise < Object > {
+  register(username,
+    password,
+    email,
+    firstName,
+    lastName) {
     return super.post('/register', {
         body: this.toForm({
           username,
@@ -35,7 +34,7 @@ export default class Auth extends Fetchable {
       });
   }
 
-  login(username: string, password: string): Promise < Object > {
+  login(username, password) {
     return super.post('/auth/credentials', {
         body: this.toForm({
           username,
@@ -47,18 +46,13 @@ export default class Auth extends Fetchable {
       });
   }
 
-  logout(): Promise < Object > {
+  logout() {
     return super.delete('/auth/credentials');
   }
 
-  setUser(response: Object): Object {
+  setUser(response) {
     const isAuthenticated = !!response.sessionId;
-    const user: {
-      isAuthenticated: boolean,
-      userName: string,
-      sessionId: number,
-      userId: number
-    } = {
+    const user = {
       isAuthenticated: false,
       userName: '',
       sessionId: 0,
@@ -73,12 +67,12 @@ export default class Auth extends Fetchable {
     return user;
   }
 
-  profile(): Promise < Object > {
+  profile() {
     return super.get('/api/v1/me')
       .then(json => json.result);
   }
 
-  forgotPassword(email: string): Promise < Object > {
+  forgotPassword(email) {
     return super.post('/api/v1/password/forgot', {
         body: this.toForm({
           email
@@ -90,10 +84,10 @@ export default class Auth extends Fetchable {
   }
 
   resetPassword(
-    email: string,
-    token: string,
-    password: string,
-    passwordRepeat: string): Promise < Object > {
+    email,
+    token,
+    password,
+    passwordRepeat) {
     return super.post('/api/v1/password/reset', {
       body: this.toForm({
         email,

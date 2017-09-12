@@ -1,16 +1,13 @@
-//@flow
-
 import _ from 'lodash';
 import fetch from 'isomorphic-fetch';
 import getErrorCodeHandler from './errorCodes';
 import Configuration from './configuration';
 
 export default class Fetchable {
-  baseUrl: string;
-  fetch: Function;
-  prepare: Function;
+  baseUrl = ''
+  fetch = null
 
-  constructor(baseUrl: string = Configuration.apiRoot, fetcher: Function = fetch) {
+  constructor(baseUrl = Configuration.apiRoot, fetcher = fetch) {
     if (!baseUrl || baseUrl === '') {
       throw new Error('baseUrl may not be empty');
     }
@@ -18,39 +15,39 @@ export default class Fetchable {
     this.fetch = fetcher || fetch;
   }
 
-  request(verb: string, url: string, options: any = {}): Promise < Object > {
+  request(verb, url, options = {}) {
     const opts = _.merge({}, options);
     opts.method = _(verb).toUpper();
     return this._fetch(url, this.prepare(opts));
   }
 
-  get(url: string, options: any = {}): Promise < Object > {
+  get(url, options = {}) {
     return this.request('GET', url, options);
   }
 
-  put(url: string, options: any = {}): Promise < Object > {
+  put(url, options = {}) {
     return this.request('PUT', url, options);
   }
 
-  post(url: string, options: any = {}): Promise < Object > {
+  post(url, options = {}) {
     return this.request('POST', url, options);
   }
 
-  patch(url: string, options: any = {}): Promise < Object > {
+  patch(url, options = {}) {
     return this.request('PATCH', url, options);
   }
 
   // I think this flow error is due to the override in CrudApi changing the param types
   // $FlowFixMe
-  delete(url: string, options: any = {}): Promise < Object > {
+  delete(url, options = {}) {
     return this.request('DELETE', url, options);
   }
 
-  search(url: string, options: any = {}): Promise < Object > {
+  search(url, options = {}) {
     return this.request('SEARCH', url, options);
   }
 
-  deserialize(response: Object): Promise < Object > | Object {
+  deserialize(response) {
     if (response.ok) {
       return response.json().then((json) => {
         return {
@@ -72,7 +69,7 @@ export default class Fetchable {
     }
   }
 
-  _fetch(url: string, options: Object) {
+  _fetch(url, options) {
     if (!url) {
       throw new Error('url may not be empty');
     }
@@ -88,7 +85,7 @@ export default class Fetchable {
       .catch(e => getErrorCodeHandler(e)());
   }
 
-  toForm(body: Object) {
+  toForm(body) {
     const form = new FormData();
     _.each(body, (v, k) => {
       form.append(k, v);
@@ -96,11 +93,11 @@ export default class Fetchable {
     return form;
   }
 
-  toJson(body: Object) {
+  toJson(body) {
     return JSON.stringify(body);
   }
 
-  prepareXhr(xhr: XMLHttpRequest) {
+  prepareXhr(xhr) {
     const defaults = {
       headers: {
         Accept: 'application/json',
@@ -114,7 +111,7 @@ export default class Fetchable {
     });
   }
 
-  prepare(options: Object) {
+  prepare(options) {
     const defaults = {
       headers: {
         Accept: 'application/json',

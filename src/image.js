@@ -1,8 +1,7 @@
-// @flow
 import CrudApi from './base';
 import Configuration from './configuration';
 
-let singleton : Image;
+let singleton;
 
 export default class Image extends CrudApi {
   constructor() {
@@ -16,11 +15,11 @@ export default class Image extends CrudApi {
     return singleton;
   }
 
-  getImageUploadUrl(): string {
+  getImageUploadUrl() {
     return `${Configuration.apiRoot}/api/v1/images`;
   }
 
-  imageUploadIntercept(file: any, xhr: Object): void {
+  imageUploadIntercept(file, xhr) {
     super.prepareXhr(xhr);
   }
 }

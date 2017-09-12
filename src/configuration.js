@@ -1,22 +1,20 @@
-//@flow
-
 class config {
-  token: string = '';
-  apiRoot: string = '';
-  throwErrors: bool = true;
-  fetch: Object = {
+  token = '';
+  apiRoot = '';
+  throwErrors = true;
+  fetch = {
     mode: 'no-cors',
     credentials: 'omit',
   };
 
-  globalErrorHandler = (e: Error, statusCode: number, message: string) => {
+  globalErrorHandler = (e, statusCode, message) => {
     console.error(e, statusCode, message);
     if (this.throwErrors) {
       throw e;
     }
   };
 
-  getAuthorizationHeader(): string {
+  getAuthorizationHeader() {
     return `Bearer ${this.token}`;
   }
 };

@@ -13,22 +13,15 @@ module.exports = {
     }
   },
   extends: [
-    "airbnb-base",
-    "plugin:flowtype/recommended"
+    "airbnb-base"
   ],
   plugins: [
-    'flowtype',
-    'flowtype-errors'
   ],
   // check if imports actually resolve
   'settings': {
-    "flowtype": {
-      "onlyFilesWithFlowAnnotation": true
-    }
   },
   // add your custom rules here
   'rules': {
-    "flowtype-errors/show-errors": 1,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',

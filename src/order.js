@@ -1,14 +1,13 @@
-// @flow
 import _ from 'lodash';
 import inflection from 'lodash-inflection';
 import CrudApi from './base';
 
 _.mixin(inflection);
 
-let singleton : any = null;
+let singleton  = null;
 
 export default class Order extends CrudApi {
-  constructor(routes : Object = {}) {
+  constructor(routes = {}) {
     super('order', _.merge({}, {
       CAPTURE_BILLING: (x, id) => `/api/v1/${_(x).pluralize().toLower()}/${id}/billing`,
       UPDATE_STATUS: (x, id, status) => `/api/v1/${_(x).pluralize().toLower()}/${id}/${status}`,
@@ -25,7 +24,7 @@ export default class Order extends CrudApi {
 
   captureBilling({
     id
-  } : Object, token : string) : Promise<Object> {
+  }, token ) {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -42,7 +41,7 @@ export default class Order extends CrudApi {
   getByKey({
     id,
     key
-  } : Object) : Promise<Object> {
+  }) {
     const headers = {
       'Content-Type': 'application/json',
     };
@@ -55,7 +54,7 @@ export default class Order extends CrudApi {
 
   updateStatus({
     id
-  } : Object, status : Object) {
+  }, status) {
     const headers = {
       'Content-Type': 'application/json',
     };

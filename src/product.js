@@ -1,8 +1,7 @@
-// @flow
 import CrudApi from './base';
 import Configuration from './configuration';
 
-let singleton : any = null;
+let singleton  = null;
 
 export default class Product extends CrudApi {
   constructor() {
@@ -19,24 +18,24 @@ export default class Product extends CrudApi {
     return singleton;
   }
 
-  singleBySku(sku : string, includeDeleted : boolean = false) {
+  singleBySku(sku , includeDeleted  = false) {
     return super
       .get(`${this.routes.GET_ONE_WITH_SKU(sku)}?includeDeleted=${includeDeleted.toString()}`)
       .then(json => json.result);
   }
 
-  imageUploadIntercept(file : any, xhr : Object) {
+  imageUploadIntercept(file , xhr) {
     super.prepareXhr(xhr);
   }
 
-  getImageUploadUrl(id : number) {
+  getImageUploadUrl(id ) {
     if (id < 1) {
       throw new Error('id must be >= 1');
     }
     return `${Configuration.apiRoot}/api/v1/products/${id}/images`;
   }
 
-  deleteImage(productId : number, id : number) {
+  deleteImage(productId , id ) {
     if (productId < 1) {
       throw new Error('productId must be >= 1');
     }

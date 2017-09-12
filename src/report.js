@@ -1,7 +1,6 @@
-// @flow
 import Fetchable from './fetchable';
 
-let singleton : any = null;
+let singleton = null;
 
 export default class Report extends Fetchable {
   constructor() {
@@ -15,15 +14,15 @@ export default class Report extends Fetchable {
     return singleton;
   }
 
-  dashboard() : Promise<Object> {
-    const body : any = new URLSearchParams();
+  dashboard() {
+    const body = new URLSearchParams();
 
     return super.get(`/api/v1/reports/dashboard?${body}`)
       .then(json => json.result);
   }
 
-  salesByProduct(groupBy : string, productId : number) : Promise<Object> {
-    const body : any = new URLSearchParams();
+  salesByProduct(groupBy, productId) {
+    const body = new URLSearchParams();
     body.set('groupBy', groupBy);
     body.set('productId', productId);
 
@@ -31,31 +30,31 @@ export default class Report extends Fetchable {
       .then(json => json.report);
   }
 
-  salesByTotal(groupBy : string) : Promise<Object> {
-    const body : any = new URLSearchParams();
+  salesByTotal(groupBy) {
+    const body = new URLSearchParams();
     body.set('groupBy', groupBy);
 
     return super.get(`/api/v1/reports/salesByTotal?${body}`)
       .then(json => json.report);
   }
 
-  salesByUser(userId : string) : Promise<Object> {
+  salesByUser(userId) {
     return super.get(`/api/v1/reports/scalar/salesByUser?userId=${userId}`)
       .then(json => json.report);
   }
 
-  revenueByUser(userId : string) : Promise<Object> {
+  revenueByUser(userId) {
     return super.get(`/api/v1/reports/scalar/revenueByUser?userId=${userId}`)
       .then(json => json.result);
   }
 
-  listingsByUser(userId : string) : Promise<Object> {
+  listingsByUser(userId) {
     return super.get(`/api/v1/reports/scalar/listingsByUser?userId=${userId}`)
       .then(json => json.result);
   }
 
-  salesByVendor(groupBy : string, vendorId : number) : Promise<Object> {
-    const body : any = new URLSearchParams();
+  salesByVendor(groupBy, vendorId) {
+    const body = new URLSearchParams();
     body.set('groupBy', groupBy);
     body.set('vendorId', vendorId);
 
@@ -63,12 +62,12 @@ export default class Report extends Fetchable {
       .then(json => json.result);
   }
 
-  inventoryShippedByUser(userId : string) : Promise<number> {
+  inventoryShippedByUser(userId) {
     return super.get(`/api/v1/reports/scalar/shippedByUser?userId=${userId}`)
       .then(json => json.result);
   }
 
-  inventoryReceivedByUser(userId : string) : Promise<number> {
+  inventoryReceivedByUser(userId) {
     return super.get(`/api/v1/reports/scalar/receivedByUser?userId=${userId}`)
       .then(json => json.result);
   }

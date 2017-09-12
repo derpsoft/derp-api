@@ -1,4 +1,3 @@
-// @flow
 import Fetchable from './fetchable';
 
 export default class Inventory extends Fetchable {
@@ -10,7 +9,7 @@ export default class Inventory extends Fetchable {
     locationId,
     productId,
     quantity,
-  } : Object) : Promise<Object> {
+  }) {
     if (quantity === 0) {
       throw new Error('quantity must be != 0');
     }
@@ -31,17 +30,17 @@ export default class Inventory extends Fetchable {
   }
 
 
-  getLogs(skip : number = 0, take : number = 25) : Promise<Object> {
+  getLogs(skip = 0, take = 25) {
     return super.get(`/api/v1/inventory-transactions?skip=${skip}&take=${take}`)
       .then(json => json.result);
   }
 
-  countLogs() : Promise<Object> {
+  countLogs() {
     return super.get('/api/v1/inventory-transactions/count')
       .then(json => json.result || json.count);
   }
 
-  searchLogs(query : string, skip : number = 0, take : number = 25) : Promise<Object> {
+  searchLogs(query , skip = 0, take = 25) {
     const body = new URLSearchParams();
     body.set('skip', skip.toString());
     body.set('take', take.toString());

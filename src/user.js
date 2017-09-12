@@ -1,7 +1,6 @@
-// @flow
 import CrudApi from './base';
 
-let singleton : any = null;
+let singleton  = null;
 
 export default class User extends CrudApi {
   constructor() {
@@ -15,8 +14,8 @@ export default class User extends CrudApi {
     return singleton;
   }
 
-  typeahead(query : string, includeDeleted : boolean = false) : Promise<Object> {
-    const body : any = new URLSearchParams();
+  typeahead(query , includeDeleted  = false) {
+    const body  = new URLSearchParams();
     body.set('query', query);
     body.set('includeDeleted', includeDeleted);
 

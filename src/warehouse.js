@@ -1,8 +1,6 @@
-// @flow
-
 import CrudApi from './base';
 
-let singleton : any = null;
+let singleton  = null;
 
 export default class Warehouse extends CrudApi {
   constructor() {
